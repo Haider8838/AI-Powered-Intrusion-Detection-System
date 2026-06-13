@@ -24,25 +24,6 @@ if hasattr(sys.stdout, 'reconfigure'):
     except Exception:
         pass
 
-# ── Auto-install deps ────────────────────────────────────────────────────────
-import subprocess
-def _install(pkg):
-    subprocess.check_call([sys.executable, '-m', 'pip', 'install', pkg, '-q'],
-                          stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
-for pkg in ['flask', 'flask_socketio', 'anthropic',
-            'scikit-learn', 'pandas', 'numpy', 'joblib', 'scapy',
-            'python-dotenv']:
-    try:
-        __import__(pkg.replace('-','_').split('[')[0])
-    except ImportError:
-        print(f'  Installing {pkg}...')
-        _install(pkg)
-try:
-    from google import genai as _g  # noqa
-except ImportError:
-    _install('google-genai')
-
 # ── Imports ──────────────────────────────────────────────────────────────────
 import os, time, threading, collections, platform, logging, warnings
 from datetime import datetime
