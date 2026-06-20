@@ -1,0 +1,14 @@
+.git
+.gitignore
+.vercel
+.vercelignore
+*.ipynb
+*.joblib
+*.pkl
+*.h5
+__pycache__
+.venv
+env
+venv
+tests
+*.md
