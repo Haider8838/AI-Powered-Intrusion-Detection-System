@@ -15,12 +15,13 @@ RUN pip install --upgrade pip setuptools wheel && \
     pip install --no-cache-dir -r requirements.txt
 
 COPY . /app
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
 
 EXPOSE 5000
 
 ENV PORT 5000
 
-# Use Gunicorn with Eventlet for Socket.IO support in production
-# Note: `server.py` creates `socketio = SocketIO(app)` at module level.
-# Gunicorn worker will serve the Flask app; eventlet enables WebSocket support.
-CMD ["sh","-c","gunicorn -k eventlet -w 1 server:app -b 0.0.0.0:${PORT:-5000}"]
+# Use start.sh as the container entrypoint; it will optionally download model artefacts
+# and then exec Gunicorn bound to the PORT environment variable.
+CMD ["/start.sh"]
