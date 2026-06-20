@@ -1,0 +1,25 @@
+.vercelignore
+
+# Large data / models and notebooks
+*.joblib
+*.pkl
+*.h5
+*.ipynb
+
+# Python env and caches
+.venv/
+env/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Test and artifacts
+*.sqlite3
+*.db
+*.log
+
+# Images / local assets
+*.png
+*.jpg
+*.jpeg
